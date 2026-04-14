@@ -814,11 +814,20 @@ body{background:var(--brand-black);color:var(--brand-text);font-family:var(--fon
         <span class="crown">&#9819;</span>
         <h3>Tessy's Weekly Favourites</h3>
         <p>Get my hand-picked finds delivered to your inbox every week.<br/>New drops, honest picks, zero fluff.</p>
-        <div class="email-form">
-          <input class="email-input" type="email" id="email-input" placeholder="your@email.com" />
-          <button class="email-submit" onclick="handleEmailSignup()">Subscribe — It's Free</button>
-        </div>
-        <div class="email-success" id="email-success">♛ You're in! Watch your inbox every week.</div>
+        <form action="https://github.us13.list-manage.com/subscribe/post?u=3f3d27051229e67b7aea4eadc&amp;id=5c5a9309bb&amp;f_id=003bfbe1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" style="margin:0">
+          <div class="email-form">
+            <input class="email-input" type="email" name="EMAIL" id="mce-EMAIL" placeholder="your@email.com" required/>
+            <button type="submit" class="email-submit">Subscribe — It's Free ♛</button>
+          </div>
+          <!-- Mailchimp bot protection -->
+          <div aria-hidden="true" style="position:absolute;left:-5000px">
+            <input type="text" name="b_3f3d27051229e67b7aea4eadc_5c5a9309bb" tabindex="-1" value="">
+          </div>
+          <div id="mce-responses">
+            <div id="mce-error-response" style="display:none;color:#ff6060;font-size:12px;margin-top:8px;text-align:center"></div>
+            <div id="mce-success-response" style="display:none;color:#c9a84c;font-size:13px;font-weight:600;margin-top:8px;text-align:center">♛ You're in! Watch your inbox every Tuesday.</div>
+          </div>
+        </form>
         <p class="email-note">No spam. Unsubscribe anytime. Sent every Tuesday.</p>
       </div>
     </div>
@@ -1165,22 +1174,9 @@ function filterCat(cat, btn) {
   btn.classList.add('active');
 }
 
-function handleEmailSignup() {
-  var email = document.getElementById('email-input').value.trim();
-  if (!email || !email.includes('@')) {
-    document.getElementById('email-input').style.borderColor = '#ff6060';
-    return;
-  }
-  // TODO: Replace this with your Mailchimp form action URL
-  // For now, show success message
-  document.querySelector('.email-form').style.display = 'none';
-  document.getElementById('email-success').style.display = 'block';
-  // Store email locally as placeholder
-  var emails = JSON.parse(localStorage.getItem('closet_emails') || '[]');
-  emails.push({email: email, date: new Date().toISOString()});
-  localStorage.setItem('closet_emails', JSON.stringify(emails));
-}
+// Mailchimp handles form submission
 
 </script>
+<script src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
 </body>
 </html>
