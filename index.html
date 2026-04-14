@@ -1301,7 +1301,7 @@ html.dark .theme-toggle .icon-sun {
 
     // ── Render products ──
     function renderProducts() {
-      const data = loadData();
+      const data = { products: PERMANENT_PRODUCTS.concat((loadData().products||[]).filter(p=>p.id>100)), videos: loadData().videos||[] };
       const grid = document.getElementById('products-grid');
       if (data.products.length === 0) {
         grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
