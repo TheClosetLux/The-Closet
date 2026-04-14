@@ -803,6 +803,7 @@ body{background:var(--brand-black);color:var(--brand-text);font-family:var(--fon
     }
 
     </style>
+<script src="https://cdn.jsdelivr.net/npm/@formspree/ajax@2/dist/index.umd.js"></script>
 </head>
 <body>
 <header class="site-header" style="padding:32px 24px 20px">
@@ -835,12 +836,25 @@ body{background:var(--brand-black);color:var(--brand-text);font-family:var(--fon
         <span class="crown">&#9819;</span>
         <h3>Tessy's Weekly Favourites</h3>
         <p>Get my hand-picked finds delivered to your inbox every Tuesday.<br/>New drops, honest picks, zero fluff.</p>
-        <form id="closet-signup" style="margin:0">
+        <form id="closet-signup"
+              action="https://formspree.io/f/xqewaeny"
+              method="POST"
+              data-fs-form
+              style="margin:0">
           <div class="email-form">
-            <input class="email-input" type="email" id="signup-email" placeholder="your@email.com" required/>
-            <button type="button" class="email-submit" onclick="submitSignup()">Subscribe — It's Free &#9819;</button>
+            <input class="email-input"
+                   type="email"
+                   name="email"
+                   id="signup-email"
+                   placeholder="your@email.com"
+                   data-fs-field
+                   required/>
+            <button type="submit"
+                    class="email-submit"
+                    data-fs-submit-btn>Subscribe — It's Free &#9819;</button>
           </div>
-          <div id="signup-msg" style="display:none;margin-top:12px;font-size:13px;font-weight:600;color:#c9a84c">&#9819; You're in! See you Tuesday.</div>
+          <div data-fs-error style="display:none;color:#ff6060;font-size:12px;margin-top:8px;text-align:center"></div>
+          <div data-fs-success style="display:none;color:#c9a84c;font-size:14px;font-weight:600;margin-top:12px;text-align:center">&#9819; You're in! See you every Tuesday.</div>
         </form>
         <p class="email-note">No spam. Unsubscribe anytime.</p>
       </div>
@@ -1193,5 +1207,10 @@ function filterCat(cat, btn) {
 </script>
 
 
+<script>
+  if (window.FormspreeAjax) {
+    FormspreeAjax.initForm({ formElement: '#closet-signup', formId: 'xqewaeny' });
+  }
+</script>
 </body>
 </html>
