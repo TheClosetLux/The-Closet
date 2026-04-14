@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Closet — Where Busy Women Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── Brand overrides: Black & Gold luxe ── */
+    :root, html.dark {
+      --brand-gold: #c9a84c;
+      --brand-gold-light: #e8c97a;
+      --brand-gold-dim: rgba(201, 168, 76, 0.18);
+      --brand-black: #0a0a0a;
+      --brand-surface: #111111;
+      --brand-card: #181818;
+      --brand-card-hover: #1e1e1e;
+      --brand-text: #f0ead6;
+      --brand-text-muted: #8a7d6a;
+
+      /* Override surface tokens for full dark/gold theme */
+      --surface-base: var(--brand-black);
+      --surface-primary: var(--brand-surface);
+      --surface-secondary: var(--brand-card);
+      --surface-elevated: var(--brand-card-hover);
+      --text-primary: var(--brand-text);
+      --text-secondary: #c8bca8;
+      --text-muted: var(--brand-text-muted);
+    }
+
+    body {
+      background: var(--brand-black);
+      color: var(--brand-text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      text-align: center;
+      padding: var(--space-12) var(--space-6) var(--space-8);
+      position: relative;
+    }
+
+    .site-header::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--brand-gold), transparent);
+      margin: var(--space-6) auto 0;
+    }
+
+    .logo-crown {
+      font-size: 28px;
+      margin-bottom: var(--space-3);
+      display: block;
+    }
+
+    .site-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 6vw, 48px);
+      font-weight: 700;
+      color: var(--brand-gold);
+      letter-spacing: 0.02em;
+      line-height: 1.15;
+      margin-bottom: var(--space-2);
+    }
+
+    .site-subtitle {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--brand-text-muted);
+    }
+
+    /* ── Nav tabs ── */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-6);
+      flex-wrap: wrap;
+    }
+
+    .nav-tab {
+      padding: 8px 22px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--brand-text-muted);
+      transition: all var(--transition-normal);
+      position: relative;
+    }
+
+    .nav-tab.active,
+    .nav-tab:hover {
+      color: var(--brand-gold);
+      background: var(--brand-gold-dim);
+    }
+
+    .nav-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 2px;
+      background: var(--brand-gold);
+      border-radius: 2px;
+    }
+
+    /* ── Main container ── */
+    .page-container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: var(--space-4) var(--space-5) var(--space-12);
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--brand-gold);
+      margin-bottom: var(--space-4);
+      padding-left: var(--space-1);
+    }
+
+    /* ── Video section ── */
+    .video-section {
+      margin-bottom: var(--space-8);
+    }
+
+    .video-card {
+      background: var(--brand-card);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.15), 0 4px 24px rgba(0,0,0,0.5);
+      margin-bottom: var(--space-4);
+      transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    }
+
+    .video-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.35), 0 8px 32px rgba(0,0,0,0.6);
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    .video-info {
+      padding: var(--space-4) var(--space-5);
+    }
+
+    .video-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--brand-text);
+      margin-bottom: var(--space-1);
+    }
+
+    .video-desc {
+      font-size: 12px;
+      color: var(--brand-text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── Product grid ── */
+    .products-section {
+      margin-bottom: var(--space-8);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+    }
+
+    .product-card {
+      background: var(--brand-card);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.12), 0 2px 12px rgba(0,0,0,0.4);
+      cursor: pointer;
+      transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.4), 0 8px 28px rgba(0,0,0,0.55);
+    }
+
+    .product-img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      background: var(--brand-card-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: var(--space-3) var(--space-3) var(--space-4);
+    }
+
+    .product-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand-text);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .product-price {
+      font-size: 12px;
+      color: var(--brand-gold);
+      font-weight: 500;
+      margin-bottom: var(--space-2);
+    }
+
+    .product-btn {
+      display: block;
+      width: 100%;
+      padding: 7px 0;
+      background: var(--brand-gold-dim);
+      color: var(--brand-gold);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: var(--radius-md);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      transition: all var(--transition-fast);
+      text-decoration: none;
+    }
+
+    .product-btn:hover {
+      background: var(--brand-gold);
+      color: #000;
+      border-color: var(--brand-gold);
+    }
+
+    /* ── Add item panel ── */
+    .add-panel {
+      background: var(--brand-card);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.15);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+
+    .add-panel h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--brand-gold);
+      margin-bottom: var(--space-5);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-4);
+    }
+
+    .form-label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--brand-text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px var(--space-4);
+      background: var(--brand-black);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: var(--radius-md);
+      color: var(--brand-text);
+      font-size: 14px;
+      font-family: var(--font-sans);
+      transition: border-color var(--transition-fast);
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--brand-gold);
+    }
+
+    .form-input::placeholder {
+      color: var(--brand-text-muted);
+      opacity: 0.6;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+    }
+
+    .add-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, var(--brand-gold), #a07830);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-lg);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity var(--transition-fast);
+      margin-top: var(--space-2);
+    }
+
+    .add-btn:hover { opacity: 0.88; }
+
+    .type-toggle {
+      display: flex;
+      gap: var(--space-2);
+      margin-bottom: var(--space-5);
+    }
+
+    .type-btn {
+      flex: 1;
+      padding: 9px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(201,168,76,0.2);
+      background: transparent;
+      color: var(--brand-text-muted);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .type-btn.active {
+      background: var(--brand-gold-dim);
+      border-color: var(--brand-gold);
+      color: var(--brand-gold);
+    }
+
+    .form-section { display: none; }
+    .form-section.active { display: block; }
+
+    /* ── Footer ── */
+    .site-footer {
+      text-align: center;
+      padding: var(--space-8) var(--space-6);
+      font-size: 11px;
+      color: var(--brand-text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    .site-footer span {
+      color: var(--brand-gold);
+    }
+
+    /* ── Empty state ── */
+    .empty-state {
+      text-align: center;
+      padding: var(--space-10) var(--space-6);
+      color: var(--brand-text-muted);
+    }
+
+    .empty-state .icon { font-size: 32px; margin-bottom: var(--space-3); }
+    .empty-state p { font-size: 13px; line-height: 1.6; }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--brand-gold);
+      color: #000;
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      white-space: nowrap;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── Tab content ── */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── Responsive ── */
+    @media (max-width: 380px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <span class="logo-crown">♛</span>
+    <h1 class="site-title">The Closet</h1>
+    <p class="site-subtitle">Where Busy Women Shop</p>
+  </header>
+
+  <!-- Nav -->
+  <nav class="nav-tabs" role="tablist">
+    <button class="nav-tab active" data-tab="shop" onclick="switchTab('shop', this)">Shop</button>
+    <button class="nav-tab" data-tab="videos" onclick="switchTab('videos', this)">Videos</button>
+    <button class="nav-tab" data-tab="manage" onclick="switchTab('manage', this)">✦ Add Items</button>
+  </nav>
+
+  <div class="page-container">
+
+    <!-- ── SHOP TAB ── -->
+    <div id="tab-shop" class="tab-content active">
+      <p class="section-label">My Picks</p>
+      <div class="products-grid" id="products-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- ── VIDEOS TAB ── -->
+    <div id="tab-videos" class="tab-content">
+      <p class="section-label">Watch & Shop</p>
+      <div id="videos-list">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- ── MANAGE TAB ── -->
+    <div id="tab-manage" class="tab-content">
+      <div class="add-panel">
+        <h3>Add New Item</h3>
+
+        <!-- Type toggle -->
+        <div class="type-toggle">
+          <button class="type-btn active" onclick="switchType('product', this)">🛍 Product</button>
+          <button class="type-btn" onclick="switchType('video', this)">▶ Video</button>
+        </div>
+
+        <!-- Product form -->
+        <div id="form-product" class="form-section active">
+          <div class="form-group">
+            <label class="form-label">Product Name</label>
+            <input class="form-input" id="p-name" type="text" placeholder="e.g. Silk Slip Dress" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Price</label>
+              <input class="form-input" id="p-price" type="text" placeholder="$49.99" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Emoji / Icon</label>
+              <input class="form-input" id="p-emoji" type="text" placeholder="👗" maxlength="4" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Amazon Affiliate Link</label>
+            <input class="form-input" id="p-link" type="url" placeholder="https://amzn.to/..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Image URL (optional)</label>
+            <input class="form-input" id="p-img" type="url" placeholder="https://..." />
+          </div>
+          <button class="add-btn" onclick="addProduct()">Add Product</button>
+        </div>
+
+        <!-- Video form -->
+        <div id="form-video" class="form-section">
+          <div class="form-group">
+            <label class="form-label">Video Title</label>
+            <input class="form-input" id="v-title" type="text" placeholder="e.g. My Winter Wardrobe Haul" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">YouTube URL or Video ID</label>
+            <input class="form-input" id="v-url" type="text" placeholder="https://youtube.com/watch?v=... or dQw4w9WgXcQ" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Short Description (optional)</label>
+            <input class="form-input" id="v-desc" type="text" placeholder="My top picks this season..." />
+          </div>
+          <button class="add-btn" onclick="addVideo()">Add Video</button>
+        </div>
+      </div>
+
+      <!-- Manage existing -->
+      <p class="section-label">Manage Items</p>
+      <div id="manage-list"></div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    Curated with <span>♥</span> by Tessy · Powered by Amazon Associates
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="theme.js"></script>
+  <script>
+    // ── State ──
+    const STORAGE_KEY = 'closet_data';
+
+    function loadData() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { products: [], videos: [] };
+      } catch { return { products: [], videos: [] }; }
+    }
+
+    function saveData(data) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    // ── Seed data (shown on first load) ──
+    function initSeedData() {
+      const data = loadData();
+      if (data.products.length === 0 && data.videos.length === 0) {
+        data.products = [
+          { id: 1, name: "Silk Wrap Dress", price: "$68", emoji: "👗", link: "#", img: "" },
+          { id: 2, name: "Gold Hoop Earrings", price: "$24", emoji: "✨", link: "#", img: "" },
+          { id: 3, name: "Cashmere Blazer", price: "$120", emoji: "🧥", link: "#", img: "" },
+          { id: 4, name: "Leather Tote Bag", price: "$89", emoji: "👜", link: "#", img: "" },
+        ];
+        data.videos = [
+          { id: 1, title: "My Autumn Wardrobe Essentials", youtubeId: "dQw4w9WgXcQ", desc: "Everything I'm wearing this season — all linked below!" },
+        ];
+        saveData(data);
+      }
+    }
+
+    // ── Tab switching ──
+    function switchTab(tab, btn) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      btn.classList.add('active');
+      if (tab === 'manage') renderManageList();
+    }
+
+    // ── Type switching (product/video) ──
+    function switchType(type, btn) {
+      document.querySelectorAll('.type-btn').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.form-section').forEach(el => el.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('form-' + type).classList.add('active');
+    }
+
+    // ── Render products ──
+    function renderProducts() {
+      const data = loadData();
+      const grid = document.getElementById('products-grid');
+      if (data.products.length === 0) {
+        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+          <div class="icon">🛍</div>
+          <p>No products yet.<br>Head to <strong style="color:var(--brand-gold)">Add Items</strong> to get started.</p>
+        </div>`;
+        return;
+      }
+      grid.innerHTML = data.products.map(p => `
+        <a class="product-card" href="${p.link || '#'}" target="_blank" rel="noopener">
+          <div class="product-img">
+            ${p.img ? `<img src="${p.img}" alt="${p.name}" onerror="this.parentElement.innerHTML='${p.emoji || '🛍'}'">` : (p.emoji || '🛍')}
+          </div>
+          <div class="product-info">
+            <div class="product-name">${p.name}</div>
+            <div class="product-price">${p.price}</div>
+            <span class="product-btn">Shop on Amazon</span>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    // ── Render videos ──
+    function renderVideos() {
+      const data = loadData();
+      const list = document.getElementById('videos-list');
+      if (data.videos.length === 0) {
+        list.innerHTML = `<div class="empty-state">
+          <div class="icon">▶</div>
+          <p>No videos yet.<br>Head to <strong style="color:var(--brand-gold)">Add Items</strong> to add a YouTube video.</p>
+        </div>`;
+        return;
+      }
+      list.innerHTML = data.videos.map(v => `
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/${v.youtubeId}?rel=0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <div class="video-title">${v.title}</div>
+            ${v.desc ? `<div class="video-desc">${v.desc}</div>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ── Render manage list ──
+    function renderManageList() {
+      const data = loadData();
+      const list = document.getElementById('manage-list');
+      const allItems = [
+        ...data.products.map(p => ({ ...p, type: 'product' })),
+        ...data.videos.map(v => ({ ...v, type: 'video' }))
+      ];
+      if (allItems.length === 0) {
+        list.innerHTML = `<div class="empty-state"><p>Nothing added yet.</p></div>`;
+        return;
+      }
+      list.innerHTML = allItems.map(item => `
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--brand-card);border-radius:var(--radius-lg);margin-bottom:8px;box-shadow:0 0 0 1px rgba(201,168,76,0.1);">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:20px;">${item.type === 'product' ? (item.emoji || '🛍') : '▶'}</span>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--brand-text)">${item.type === 'product' ? item.name : item.title}</div>
+              <div style="font-size:11px;color:var(--brand-text-muted);text-transform:uppercase;letter-spacing:0.1em">${item.type}</div>
+            </div>
+          </div>
+          <button onclick="deleteItem('${item.type}', ${item.id})" style="background:rgba(255,80,80,0.12);border:1px solid rgba(255,80,80,0.25);color:#ff6060;border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;cursor:pointer;">Remove</button>
+        </div>
+      `).join('');
+    }
+
+    // ── Add product ──
+    function addProduct() {
+      const name = document.getElementById('p-name').value.trim();
+      const price = document.getElementById('p-price').value.trim();
+      const emoji = document.getElementById('p-emoji').value.trim();
+      const link = document.getElementById('p-link').value.trim();
+      const img = document.getElementById('p-img').value.trim();
+      if (!name) { showToast('Please enter a product name'); return; }
+      const data = loadData();
+      const id = Date.now();
+      data.products.push({ id, name, price, emoji: emoji || '🛍', link, img });
+      saveData(data);
+      renderProducts();
+      // Clear
+      ['p-name','p-price','p-emoji','p-link','p-img'].forEach(id => document.getElementById(id).value = '');
+      showToast('✓ Product added!');
+    }
+
+    // ── Add video ──
+    function addVideo() {
+      const title = document.getElementById('v-title').value.trim();
+      const urlRaw = document.getElementById('v-url').value.trim();
+      const desc = document.getElementById('v-desc').value.trim();
+      if (!title || !urlRaw) { showToast('Please enter a title and YouTube URL'); return; }
+      const youtubeId = extractYouTubeId(urlRaw);
+      if (!youtubeId) { showToast('Could not parse YouTube URL'); return; }
+      const data = loadData();
+      data.videos.push({ id: Date.now(), title, youtubeId, desc });
+      saveData(data);
+      renderVideos();
+      ['v-title','v-url','v-desc'].forEach(id => document.getElementById(id).value = '');
+      showToast('✓ Video added!');
+    }
+
+    // ── Delete item ──
+    function deleteItem(type, id) {
+      const data = loadData();
+      if (type === 'product') data.products = data.products.filter(p => p.id !== id);
+      else data.videos = data.videos.filter(v => v.id !== id);
+      saveData(data);
+      renderManageList();
+      renderProducts();
+      renderVideos();
+      showToast('Removed');
+    }
+
+    // ── Extract YouTube ID ──
+    function extractYouTubeId(url) {
+      const patterns = [
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{11})/,
+        /^([A-Za-z0-9_-]{11})$/
+      ];
+      for (const p of patterns) {
+        const m = url.match(p);
+        if (m) return m[1];
+      }
+      return null;
+    }
+
+    // ── Toast ──
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    // ── Init ──
+    initSeedData();
+    renderProducts();
+    renderVideos();
+  </script>
+</body>
+</html>
