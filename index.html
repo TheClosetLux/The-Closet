@@ -812,7 +812,13 @@ body{background:var(--brand-black);color:var(--brand-text);font-family:var(--fon
         <span class="crown">&#9819;</span>
         <h3>Tessy's Weekly Favourites</h3>
         <p>Get my hand-picked finds delivered to your inbox every Tuesday.<br/>New drops, honest picks, zero fluff.</p>
-        <div class="ml-embedded" data-form="orwjEh"></div>
+        <form id="closet-signup" style="margin:0">
+          <div class="email-form">
+            <input class="email-input" type="email" id="signup-email" placeholder="your@email.com" required/>
+            <button type="button" class="email-submit" onclick="submitSignup()">Subscribe — It's Free &#9819;</button>
+          </div>
+          <div id="signup-msg" style="display:none;margin-top:12px;font-size:13px;font-weight:600;color:#c9a84c">&#9819; You're in! See you Tuesday.</div>
+        </form>
         <p class="email-note">No spam. Unsubscribe anytime.</p>
       </div>
     </div>
@@ -1159,15 +1165,10 @@ function filterCat(cat, btn) {
   btn.classList.add('active');
 }
 
-// Mailchimp handles form submission
+
 
 </script>
 
-<script>
-    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},
-    l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
-    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-    ml('account', '2267456');
-</script>
+
 </body>
 </html>
